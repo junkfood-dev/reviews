@@ -20,21 +20,23 @@
 4. `push` 한다.  
    ![push](temp/push.png)
    ![push](temp/push2.png)
-4. `main` 브랜치로 pull request를 요청한다.
+5. `main` 브랜치로 pull request를 요청한다.
     1. `Compare & pull request` 클릭  
        ![pull request](temp/pull_request.png)
     2. `Create pull request` 클릭  
        ![pull request](temp/pull_request2.png)
-5. 나한테 pr 날렸다고 말한다.
-6. 내가 확인하고 병합 해줄때까지 기다린다.
+6. 나한테 pr 날렸다고 말한다.
+7. 내가 확인하고 병합 해줄때까지 기다린다.
 
 ---
 
 ## 주의사항
 
-1. 작업 전 `git pull`을 한다.  
-   (각자 자기 폴더에 작업하기 때문에 안해도 되지만, 습관을 들이셈)
+1. 작업 전 `main` 브랜치에서 `git pull`을 한다.
+    1. 개인적으로 생성한 브랜치는 pr 과정에서 내가 삭제함.
+    2. 각자 자기 폴더에 작업하기 때문에 안해도 되지만, 습관을 들이셈
 2. `main` 브랜치가 아닌 `이름/공부내용` 브랜치를 새로 만들어서 작업한다.
+    1. 브랜치는 `main` 브랜치에서 만들어야 함
 3. 만약 브랜치를 생성하는 것을 까먹고, `main`브랜치 혹은 다른 브랜치에 작업했다면, 아래 내용을 따라한다.
     1. 새로운 브랜치 생성 및 전환  
        `git switch -c jisung/html`
