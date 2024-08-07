@@ -15,15 +15,16 @@
 
 1. `이름/공부내용`의 브랜치를 만들고 변경한다.
 2. 자기 이름 폴더에 복습 자료를 생성한다.
-3. 복습 자료를 작성 후 `commit` `push` 한다.  
-   ![commit]('temp/commit.png')
-   ![push]('temp/push.png')
-   ![push]('temp/push2.png')
+3. 복습 자료를 작성 후 `commit` 한다.  
+   ![commit](temp/commit.png)
+4. `push` 한다.  
+   ![push](temp/push.png)
+   ![push](temp/push2.png)
 4. `main` 브랜치로 pull request를 요청한다.
     1. `Compare & pull request` 클릭  
-       ![pull request]('temp/pull_request.png')
+       ![pull request](temp/pull_request.png)
     2. `Create pull request` 클릭  
-       ![pull request]('temp/pull_request2.png')
+       ![pull request](temp/pull_request2.png)
 5. 나한테 pr 날렸다고 말한다.
 6. 내가 확인하고 병합 해줄때까지 기다린다.
 
