@@ -3,7 +3,7 @@
 ## 시작하기
 
 1. 아래 명령어를 입력해서 저장소를 클론한다.  
-   `git clone https://github.com/junkfood-dev/html-css-js.git`
+   `git clone https://github.com/junkfood-dev/reviews.git`
 2. 각자 자기 `이름/공부내용`의 브랜치를 만들고 생성한 브랜치로 변경한다.  
    `git branch jisung/html` 이후 `git switch jisung/html`  
    또는 `git switch -c jisung/html` (브랜치 생성 후 바로 변경)
