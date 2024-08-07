@@ -1,4 +1,4 @@
-# html css js 복습을 위한 저장소
+# 복습을 위한 저장소
 
 ## 시작하기
 
@@ -21,10 +21,13 @@
    ![push](temp/push.png)
    ![push](temp/push2.png)
 5. `main` 브랜치로 pull request를 요청한다.
-    1. `Compare & pull request` 클릭  
+    1. `main` 브랜치에서 `Compare & pull request` 클릭  
        ![pull request](temp/pull_request.png)
-    2. `Create pull request` 클릭  
+    2. 또는 새로 `push`한 브랜치에서 `Open pull request` 클릭  
+       ![pull request](temp/pull_request3.png)
+    3. `Create pull request` 클릭  
        ![pull request](temp/pull_request2.png)
+
 6. 나한테 pr 날렸다고 말한다.
 7. 내가 확인하고 병합 해줄때까지 기다린다.
 
