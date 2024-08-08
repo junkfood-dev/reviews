@@ -51,3 +51,14 @@
        `git fetch origin`  
        `git reset --hard origin/main`
     3. 이렇게 하면 위에서 생성한 새로운 브랜치로 커밋 내용이 변경되므로 브랜치를 변경하여 작업 진행
+
+---
+
+## 앞으로 할 내용
+
+1. 커밋 메세지 제대로 작성하기
+2. pull request `branch` 지정하기
+3. pull request `reviewers` 지정하기  
+   (현재는 내가 자동으로 지정되게 해놨음)
+4. pull request `assignees` 지정하기
+5. 코드 리뷰 해보기
