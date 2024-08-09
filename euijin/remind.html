@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>flex</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            .container {
+                width: 500px;
+                height: 400px;
+                background-color: purple;
+                color: white;
+                display: flex;
+                flex-direction: column;
+                margin: 20px;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .header {
+                height: 100px;
+                background-color: skyblue;
+                justify-content: center;
+            }
+
+            .main {
+                height: 300px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+
+            }
+
+            .section {
+                background-color: #927ad5;
+                flex: 2;
+
+            }
+
+            .aside {
+                color: black;
+                background-color: yellowgreen;
+                flex: 1;
+            }
+
+            .footer {
+                height: 100px;
+                background-color: orangered;
+
+            }
+
+            .header, .footer, .section, .aside {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">header</div>
+            <div class="main">
+                <div class="section">section>article</div>
+                <div class="aside">aside</div>
+            </div>
+            <div class="footer">footer</div>
+        </div>
+    </body>
+</html>
