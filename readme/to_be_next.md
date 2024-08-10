@@ -9,7 +9,7 @@
 4. [pull request `assignees` 지정하기](../to_be_next/assignees.md)
     - [SangWon-Lee1](https://github.com/SangWon-Lee1) 완료
 5. 코드 리뷰 해보기
-6. terminal 연습 해보기
-7. vi 연습 해보기
+6. [terminal 연습 해보기](../readme/terminal.md)
+7. [vi 연습 해보기](../readme/vi.md)
 8. markdown 문법 사용해보기
 9. [Git Flow 연습 해보기](https://github.com/junkfood-dev/git-flow-tutorial)
