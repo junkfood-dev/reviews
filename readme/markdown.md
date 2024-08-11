@@ -145,7 +145,7 @@
 ```
 
 [Google](https://google.com)  
-![이미지 없음](나는 이미지가 없다)
+![이미지 없음](no_image.jpg)
 
 </div>
 </details>
