@@ -10,5 +10,5 @@
 5. 코드 리뷰 해보기
 6. ~~[terminal 연습 해보기](../readme/terminal.md)~~
 7. ~~[vi 연습 해보기](../readme/vi.md)~~
-8. markdown 문법 사용해보기
+8. [markdown 문법 사용해보기](../readme/markdown.md)
 9. [Git Flow 연습 해보기](https://github.com/junkfood-dev/git-flow-tutorial)
