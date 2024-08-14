@@ -12,3 +12,5 @@
 8. [markdown 문법 사용해보기](../readme/markdown.md)
 9. [Git Flow 연습 해보기](https://github.com/junkfood-dev/git-flow-tutorial)
 10. [for 연습하기](../readme/for.md)
+11. [JavaScript 시험](../readme/javascript/javascript_test.md)
+12. [JavaScript 시험2](../readme/javascript/javascript_test2.md)
