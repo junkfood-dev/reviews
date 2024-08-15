@@ -35,11 +35,11 @@ d.push('orange');
 6. 숫자, 문자열, 불리언, 배열, 객체의 에제를 하나씩 작성하세요.(변수에 할당)
 
 ```javascript
-number = 3;
-string = '어려워'
-boolean = ture;
-array = [1, 2, 3];
-object = {
+let number = 3;
+let string = '어려워'
+let boolean = ture;
+let array = [1, 2, 3];
+let object = {
     name: '상원',
     age: 34,
     job: '백수'
@@ -108,8 +108,8 @@ console.log(x <= y); // false
 let a = true;
 let b = false;
 
-console.log(a && b); // false 둘다 같아야함
-console.log(a || b); // true 둘중 하나만 같으면 됨
+console.log(a && b); // false 둘다 true여야함
+console.log(a || b); // true 둘중 하나만 true
 console.log(!b); // true
 ```
 
@@ -125,6 +125,9 @@ if (score >= 50) {
 else {
     console.log('fail');
 }
+///////////////////////////////////////////
+let x = score >= 50 ? 'pass' : 'fail';
+console.log(x);
 ```
 
 14. 다음 코드에서 변수 `c`의 값은?
@@ -146,6 +149,9 @@ if (age >= 18) {
 else {
     console.log('kid');
 }
+/////////////////////////////////
+let age2 = age >= 18 ? 'adult' : 'kid';
+console.log(age2);
 ```
 
 16. 변수 score가 90 이상이면 `A`, 80 이상이면 `B`, 70 이상이면 `C`, 그 외에는 `F`를 출력하는 조건문을 작성하세요.
@@ -162,8 +168,11 @@ else if (score >= 70) {
     console.log('C');
 }
 else {
-    console.log('D')
+    console.log('f');
 }
+///////////////////////////////////////////
+let score2 = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : 'f';
+console.log(score2);
 ```
 
 17. 변수 num이 짝수인지 홀수인지 판단하여 각각 `짝수` 또는 `홀수`를 출력하는 조건문을 작성하세요.
@@ -176,6 +185,9 @@ if (num % 2 === 0) {
 else {
     console.log('홀수');
 }
+////////////////////////////////
+let num2 = num % 2 === 0 ? '짝수' : '홀수';
+console.log(num2);
 ```
 
 18. `for` 문을 사용하여 1부터 10까지의 숫자를 출력하는 코드를 작성하세요.
@@ -192,7 +204,7 @@ for (let i = 1; i <= 10; i++) {
 let i = 10;
 while (i > 0) {
     console.log(i);
-    i--;
+    i -= 1;
 }
 ```
 
@@ -209,8 +221,8 @@ for (let i = 1; i <= 20; i++) {
 21. 문자열 `Hello`의 각 문자를 `for` 문을 사용하여 한 줄씩 출력하는 코드를 작성하세요.
 
 ```javascript
-let x = ['Hello']
-for (let i; i(x.length); i++) {
+let x = 'Hello'
+for (let i = 0; i < (x.length); i++) {
     console.log(x[i]);
 }
 ```
@@ -218,13 +230,19 @@ for (let i; i(x.length); i++) {
 22. 두 개의 숫자를 더한 값을 반환하는 함수 `addNumbers`를 작성하세요.
 
 ```javascript
-//처음보는데;;
+function addNumners(a, b) {
+    return a + b;
+}
 ```
 
 23. 주어진 문자열을 대문자로 변환하여 반환하는 함수 `toUpperCase`를 작성하세요.
 
 ```javascript
 console.log('hello world..'.toUpperCase());
+///////////////////////////////////////////
+function toUpperCase(list) {
+    return list.toUppercass;
+}
 ```
 
 24. 주어진 배열의 첫 번째 요소를 반환하는 함수 `getFirstElement`를 작성하세요.
@@ -235,10 +253,16 @@ const arr = [1, 2, 3, 4];
 const first = arr.shift();
 console.log(first);
 //이런식으로 하면 될려나
+/////////////////////////////////////
+function getFirstElement(list) {
+    return list.shift(0);
+}
 ```
 
 25. 주어진 숫자가 짝수인지 홀수인지 반환하는 함수 `isEven`를 작성하세요.
 
 ```javascript
-//이것도 모르겟음; 처음봄
+function isEven(i) {
+    return i % 2 === 0 ? '짝수' : '홀수';
+}
 ```
