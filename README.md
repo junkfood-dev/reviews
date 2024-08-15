@@ -6,6 +6,6 @@
 
 ## 2. [git](readme/git.md)
 
-## 3. [JavaScript](readme/javascript.md)
+## 3. [JavaScript](readme/javascript/javascript.md)
 
 ## 4. [앞으로 할 내용](readme/to_be_next.md)
