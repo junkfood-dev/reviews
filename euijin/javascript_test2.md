@@ -1,6 +1,10 @@
 # JavaScript 기초 문제2
 
 1. 실수 문자열(`123.45` 등)을 입력 받아 정수로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 함수 정의는 잘 했으나, 입력은 숫자가 아닌 **문자열**입니다.  
+  그래도 결과는 같으니 참 잘 했어요.
+
 ```javascript
 let k = 123.45;
 function int(x) {
@@ -8,7 +12,12 @@ function int(x) {
 }
 int(k);
 ```
+
 2. 실수 문자열(`123.45` 등)을 입력 받아 실수로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 함수 정의는 잘 했으나, 입력은 숫자가 아닌 **문자열**입니다.  
+  그래도 결과는 같으니 참 잘 했어요.
+
 ```javascript
 let k = 123.45;
 function float(x) {
@@ -16,7 +25,11 @@ function float(x) {
 }
 float(k);
 ```
+
 3. 문자열로 이루어진 배열을 입력 받아 배열의 요소들을 결합한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let arr = ['a','b','c'];
 function a(x) {
@@ -25,7 +38,13 @@ function a(x) {
 }
 a(arr)
 ```
+
 4. 2진수 문자열(`010` 등)을 입력 받아 10진수와 8진수로 각각 변환한 결과를 출력하는 함수를 작성하세요.
+
+- 문제를 잘 읽어보세요.  
+  반환이 아니고 **출력**입니다.  
+  그래도 주어진 문제에 대한 해결은 잘 했어요.
+
 ```javascript
 let str = '1011'
 function change(str) {
@@ -41,7 +60,11 @@ function changes(str) {
 }
 changes(str);
 ```
+
 5. 숫자를 입력 받아 문자열로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let int = 123;
 function a(x) {
@@ -49,19 +72,31 @@ function a(x) {
 }
 a(int);
 ```
+
 6. 숫자 `0`과 빈 문자열 `''`을 각각 불리언 값으로 변환한 결과를 출력하세요.
+
+- 참 잘했어요.
+
 ```javascript
 console.log(Boolean(0)); // false
 console.log(Boolean('')); // false
 ```
+
 7. 불리언 값 `true`와 `false`를 각각 숫자로 변환한 결과를 출력하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let trueN = Number(true);
 let falseN = Number(false);
 console.log(trueN);
 console.log(falseN); 
 ```
+
 8. 배열을 입력 받아 문자열로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let arr = ['a','b','c'];
 function a(x) {
@@ -69,12 +104,20 @@ function a(x) {
 }
 a(arr);
 ```
+
 9. 문자열 `JavaScript is very hard..`을 공백을 기준으로 나누어 출력하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let a = 'JavaScript is very hard..';
 console.log(a.split(" "));
 ```
+
 10. 숫자를 입력 받아 16진수 문자열로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let num = 1234;
 function change(int) {
@@ -82,7 +125,11 @@ function change(int) {
 }
 change(num);
 ```
+
 11. 숫자 `123.456`을 소수점 이하 2자리로 고정된 문자열로 변환한 결과를 출력하세요.
+
+- 참 잘했어요.👍🏼
+
 ```javascript
 let num = 123.456;
 function fix(x) {
@@ -90,7 +137,11 @@ function fix(x) {
 }
 fix(num);
 ```
+
 12. 문자열을 입력 받아 첫 번째 문자를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 12. let str = 'hello';
 function a(x) {
@@ -98,7 +149,11 @@ function a(x) {
 }
 a(str);
 ```
+
 13. 두 개의 문자열을 입력 받아 두 문자열을 결합한 결과를 반환하는 함수를 작성하세요.
+
+- 문제를 잘 읽어보세요.
+
 ```javascript
 let arr = ['a', 'b'];
 function a(x,y){
@@ -106,7 +161,11 @@ function a(x,y){
 }
 a(arr);
 ```
+
 14. 두 개의 문자열을 입력 받아 첫 번째 문자열에 두 번째 문자열이 포함되어 있는지 확인한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let str1 = "hello world nice to meet you"
 let str2 = "world"
@@ -115,12 +174,20 @@ function inc(s1,s2) {
 }
 inc(str1,str2);
 ```
+
 15. 문자열 `JavaScript`에서 `Java` 부분을 출력하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let str = 'JavaScript';
 console.log(str.slice(0,4));
 ```
+
 16. 영어 문자열을 입력 받아 대문자로 변환한 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let str = 'abcdefg';
 function upper(x) {
@@ -128,7 +195,11 @@ function upper(x) {
 }
 upper(str);
 ```
+
 17. 배열과 임의의 변수를 입력 받아 배열의 마지막에 변수를 추가한 결과를 반환하는 함수를 작성하세요.
+
+- 뭐가 잘못되었는지 문제를 다시 한 번 천천히 잘 읽어보세요.
+
 ```javascript
  let arr = ['a','b','c','d'];
 function push(x) {
@@ -136,7 +207,11 @@ function push(x) {
 }
 push('e');
 ```
+
 18. 배열 `[1, 2, 3, 4]`에서 마지막 요소를 제거하고, 변수에 저장하여 두 변수를 출력하는 코드를 작성하세요.
+
+- 뭐가 잘못되었는지 문제를 다시 한 번 천천히 잘 읽어보세요.
+
 ```javascript
  let arr = ['a','b','c','d'];
 function pop(x) {
@@ -144,7 +219,11 @@ function pop(x) {
 }
 pop(arr);
 ```
+
 19. 배열 `[1, 2, 3, 4]`에서 첫 번째 요소를 제거하고, 변수에 저장하여 두 변수를 출력하는 코드를 작성하세요.
+
+- 뭐가 잘못되었는지 문제를 다시 한 번 천천히 잘 읽어보세요.
+
 ```javascript
  let arr = [1, 2, 3, 4];
 function shift(x) {
@@ -153,7 +232,11 @@ function shift(x) {
 shift(arr);
 
 ```
+
 20. 배열과 임의의 변수를 입력 받아 배열의 첫 번째에 변수를 추가한 결과를 반환하는 함수를 작성하세요.
+
+- 뭐가 잘못되었는지 문제를 다시 한 번 천천히 잘 읽어보세요.
+
 ```javascript
 let arr = ['a','b','c','d'];
 function unshift(x) {
@@ -161,12 +244,21 @@ function unshift(x) {
 }
 unshift('z');
 ```
+
 21. 배열 `['a', 'b', 'c', 'd']`에서 요소 `c`의 인덱스를 출력하세요.
+
+- 이제는 문제를 안 읽고 푸나요?  
+  심지어 설명도 해준건데 ㅡㅡ
+
 ```javascript
 let arr = ['a','b','c','d'];
 console.log(arr[2]);
 ```
+
 22. 실수 한 개를 입력 받아 반올림, 올림, 내림한 결과를 출력하는 함수를 작성하세요.
+
+- 잘 했는데, **출력**이랑 **반환**을 잘 보세요.
+
 ```javascript
 let float = 123.56
 function round(x) {
@@ -182,11 +274,20 @@ function floor(x) {
 }
 floor(float);
 ```
+
 23. `0`이상 `1`미만의 난수를 생성하는 코드를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 console.log(Math.random());
 ```
+
 24. 숫자 세 개를 입력 받아 가장 큰 수를 반환하는 함수를 작성하세요.
+
+- 배열을 입력받아서 처리하는 부분은 참 잘했어요.  
+  하지만 문제에서 주어진 입력은 배열이 아닌 숫자 3개 입니다.
+
 ```javascript
 let arr = [10, 20, 30];
 function max(a) {
@@ -194,7 +295,11 @@ function max(a) {
 }
 max(arr);
 ```
+
 25. 배열을 입력받아 배열의 순서를 반대로 뒤집은 결과를 반환하는 함수를 작성하세요.
+
+- 참 잘했어요.
+
 ```javascript
 let arr = [10,20,30];
 function rev(a) {
