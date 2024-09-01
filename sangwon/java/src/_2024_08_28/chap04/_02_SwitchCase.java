@@ -1,6 +1,6 @@
 package _2024_08_28.chap04;
 
-public class _02_SwichCase {
+public class _02_SwitchCase {
     public static void main(String[] args) {
         // 조건문 Switch Case (명확한 케이스가 있을 때)
 
