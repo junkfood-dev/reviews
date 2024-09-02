@@ -18,9 +18,9 @@ public class _02_Conversion {
         // 변수 + ""  / Casting방식 주로 많이씀
         int intValue1 = 10;
         String StrValue;
-        String x = String.valueOf(intValue1);
-        String y = Integer.toString(intValue1);
-        String z = "" + intValue1;
+        StrValue = String.valueOf(intValue1);
+        StrValue = Integer.toString(intValue1);
+        StrValue = "" + intValue1;
 
         //null 처리
         Object nullValue = null;
