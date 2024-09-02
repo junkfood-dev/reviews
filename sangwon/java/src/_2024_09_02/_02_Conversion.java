@@ -25,8 +25,8 @@ public class _02_Conversion {
         //null 처리
         Object nullValue = null;
         String str1;
-        str = nullValue.toString(); // NullPointerException 에러 발생
-        str = String.valueOf(nullValue); // 문자열 "null"로 변환됨.
+        str1 = nullValue.toString(); // NullPointerException 에러 발생
+        str1 = String.valueOf(nullValue); // 문자열 "null"로 변환됨.
         // String 값이 없더라도 (String a = "";) 초기화하는게 좋음
     }
 }
