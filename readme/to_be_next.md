@@ -14,5 +14,5 @@
 10. [for 연습하기](../readme/for.md)
 11. ~~[JavaScript 시험](../readme/javascript/javascript_test.md)~~
 12. ~~[JavaScript 시험2](../readme/javascript/javascript_test2.md)~~
-13. [JavaScript 시험3](../readme/javascript/javascript_test3.md)
-14. 정규표현식 사용해보기
+13. ~~정규표현식 사용해보기~~
+14. [class 연습하기](../readme/class.md)
