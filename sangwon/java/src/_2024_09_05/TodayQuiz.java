@@ -15,13 +15,13 @@ public class TodayQuiz {
 
         // 문자열 모든 공백 제거하기
         String str2 = "   Hello Welcome Java    ";
-        String s = str2.replaceAll(" ", "");
-        System.out.println(s.trim());
+        String s = str2.replace(" ", "");
+        System.out.println(s);
 
         // 문자열 "aaaabbccd" -> a4b2c2d1 나오게하기
         // 수업중 퀴즈풀이 시간안에 못 풀었던 문제
         String str3 = "aaaabbccd";
-        StringBuffer str4 = new StringBuffer();
+        StringBuilder str4 = new StringBuilder();
         int sum = 1;
         for (int i = 1; i < str3.length(); i++) {
             if (str3.charAt(i) == str3.charAt(i - 1)) {
