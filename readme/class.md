@@ -14,19 +14,12 @@
     - 속성
         - `id`: 학번, `int` 타입의 데이터. `2024xx` 형태로 이루어져 있음. `xx`는 01부터 순차적으로 증가해야 함.
         - `name`: 이름, `String` 타입의 데이터.
-        - `attendanceRecords`: 출결 객체 배열, `List<AttendanceRecord> 타입의 데이터.
+        - `attendanceRecords`: 출결 배열, `ArrayList<Date>` 타입의 데이터.
     - 생성자: `Student(String name)`
     - 메소드
         - `getInfo()`: 학생 정보(학번, 이름)를 출력하는 기능
         - `attendanceRecord()`: 출석하는 기능
         - `getAllRecords()`: 출석 정보를 출력하는 기능
-2. 출결 기록 클래스
-    - 클래스명: `AttendanceRecord`
-    - 속성
-        - `date`: 출결 날짜 및 시간, `Date` 타입의 데이터.
-    - 생성자: `AttendanceRecord()`
-    - 메소드
-        - `getDate`: 출결 정보를 출력하는 기능
 
 ---
 
