@@ -7,14 +7,15 @@ import java.util.Date;
 class Student {
     // static 사용하여 클래스변수로 학생등록할때마다 숫자 올라가게하게 함
     // 객체 변수로 만들면 계속 같은값나옴
-    static int id = 202400;
+    int id;
+    static int nextId = 202400;
     String name;
     // ArrayList<Date> 제네릭? 뭔지몰라서 찾아봄
     ArrayList<Date> attendanceRecord;
 
     Student(String name) {
         this.name = name;
-        ++id;
+        this.id = ++nextId;
         attendanceRecord = new ArrayList<>();
     }
 
@@ -62,6 +63,8 @@ public class AttendanceSystem {
         student2.printInFo();
         student2.attendanceRecord();
         student2.getAllRecords();
+
+        student1.printInFo();
 
         // 한번에 실행하면 시간기록 다 똑같아서
         // 디버깅 이용해서 현재시간 기록 바뀌는지 확인해봄
