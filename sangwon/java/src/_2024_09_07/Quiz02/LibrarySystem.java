@@ -57,6 +57,7 @@ class Library {
                 books.remove(i);
                 System.out.println(id + "번책 목록에서 제거 되었습니다.");
                 find = true;
+                i--;
             }
         }
         if (!find) {
