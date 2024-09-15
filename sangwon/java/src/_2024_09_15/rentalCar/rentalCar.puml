@@ -1,0 +1,30 @@
+@startuml
+
+class Car {
+    int carNumber
+    String name
+    int price
+    boolean isRental
+
+    Car() {}
+
+    +getNumber()
+    +getName()
+    +getPrice()
+    +getIsRental()
+    +setIsRental()
+}
+
+class CarRental {
+    ArrayList<Car> rantalList
+
+    CarRental()
+
+    +addCar()
+    +borrowByCar()
+    +returnByCar()
+    +findRentalCar()
+    +printRentalAvailable()
+}
+
+@enduml
