@@ -1,0 +1,32 @@
+@startuml
+
+class AddressBook {
+    List<Contact> contacts
+
+    +addContact()
+    +displayContacts()
+    +searchContact(name)
+    +quit()
+}
+
+class Contact {
+    String name
+    String phoneNumber
+
+    +getName()
+    +getPhoneNumber()
+}
+
+class BusinessContact extends Contact {
+    String company
+
+    +getCompany()
+}
+
+class PersonalContact extends Contact {
+    String relationship
+
+    +getRelationship()
+}
+
+@enduml
