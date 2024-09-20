@@ -1,0 +1,44 @@
+@startuml
+
+class Member {
+    String name
+    String role
+    ArrayList<ToDo> toDoList
+
+    Member()
+
+    +void addToDo()
+    +void removeToDo()
+    +void printToDoList()
+    +String getName()
+    +String getRole()
+}
+
+class Family {
+    ArrayList<Member> list
+
+    Family()
+
+    +void addMember()
+    +void addMemberToDo()
+    +void printMemberList()
+    +void printAllToDos()
+}
+
+class ToDo {
+    String toDo
+    String toDoDate
+    Member owner
+    boolean isComplete
+
+    ToDo()
+
+    +void markIsComplete()
+    +String getToDo()
+    +String getToDoDate()
+    +String getOwner()
+    +boolean getIsComplete()
+    +void setIsComplete()
+}
+
+@enduml

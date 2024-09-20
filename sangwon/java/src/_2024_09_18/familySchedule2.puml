@@ -1,0 +1,40 @@
+@startuml
+class Member{
+
+String name
+String role
+
++String getName()
++String getRole()
+}
+
+class Todo{
+
+String title;
+String date;
+String owner;
+boolean isComplete;
+
+
++void setIsComplete()
++boolean getIsComplete()
++String getTitle()
++String getDate()
++String getOwner()
+}
+
+
+class Management{
+
+ArrayList<Member> family
+ArrayList<Todo> todoList
+
++void addMember()
++void addTodo()
++void markTodoComplete()
++void printTodoList()
++void removeTodo()
++void printFamily()
+}
+
+@enduml

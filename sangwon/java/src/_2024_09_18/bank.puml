@@ -1,0 +1,29 @@
+@startuml
+
+class Account{
+    String name
+    String accountNumber
+    int balance
+
+    Account()
+
+    +void deposit()
+    +void withdraw()
+    +int getBalance()
+    +String getAccountNumber()
+    +String getName()
+}
+
+class Bank{
+    ArrayList<Account> list
+
+    Bank()
+
+    +void addAccount()
+    +void depositByAccount()
+    +void withdrawByAccount()
+    +void printBalance()
+    +void quit()
+}
+
+@enduml
