@@ -156,3 +156,15 @@ public class Util {
     }
 }
 ```
+답2)
+```java
+public class Util {
+    public static <T extends Package<K, V>, K, V> V getValue(T pair, K key) {
+        if (pair.getKey() == Key) {
+            return pair.getValue();
+        } else {
+            return null;
+        }
+    }
+}
+```
