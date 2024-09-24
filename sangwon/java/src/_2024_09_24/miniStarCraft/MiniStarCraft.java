@@ -54,6 +54,19 @@ public class MiniStarCraft {
         };
         addZergling.schedule(addZerglingTimer, 0, 6000);
 
+        // 저글링 강화
+        Timer addUpZergling = new Timer();
+        TimerTask addUpZerglingTimer = new TimerTask() {
+            @Override
+            public void run() {
+                for (Zergling zergling : zerglings) {
+                    zergling.adrenaline(5);
+                    System.out.println(zergling.getName() + "의 체력이 증가 했습니다.");
+                }
+            }
+        };
+        addUpZergling.schedule(addUpZerglingTimer, 0 , 20000);
+
         // 벙커 공격
         zerglingAttack = new Timer();
         TimerTask zerglingAttakTimer = new TimerTask() {
