@@ -8,7 +8,6 @@ List<String> words = Arrays.asList("apple", "banana", "cherry");
 List<String> result = words.stream()
         .filter(str -> str.length() <= 5)
         .toList();
-System.out.println(result);
 ```
 
 2. 
@@ -22,7 +21,6 @@ List<String> result = words.stream()
         .map(str -> str.toUpperCase())
         .sorted(Comparator.reverseOrder())
         .toList();
-System.out.println(result);
 ```
 
 3. 
@@ -34,7 +32,6 @@ List<String> words = Arrays.asList("apple", "banana", "cat", "dog", "elephant");
 List<String> result = words.stream()
         .filter(str -> str.length() >= 5)
         .toList();
-System.out.println(result);
 ```
 
 4. 
@@ -46,7 +43,6 @@ List<Integer> numbers = Arrays.asList(5, 12, 25, 37, 48, 50, 63);
 List<Integer> result = numbers.stream()
         .filter(num -> num > 10 && num < 50)
         .toList();
-System.out.println(result);
 ```
 
 5. 
@@ -58,5 +54,4 @@ List<String> sentences = Arrays.asList("I like apples", "Bananas are tasty", "ap
 List<String> result = sentences.stream()
         .filter(str -> str.contains("apple"))
         .toList();
-System.out.println(result);
 ```
