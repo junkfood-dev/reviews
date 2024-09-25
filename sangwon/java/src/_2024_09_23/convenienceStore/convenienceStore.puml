@@ -1,0 +1,16 @@
+@startuml
+
+class Store
+class Inventory
+class Product
+class Category
+class Promotion
+class Sale
+class SalesRecord
+class Receipt
+class Customer
+interface Payment
+class CashPayment extends Payment
+class CardPayment extends Payment
+
+@enduml

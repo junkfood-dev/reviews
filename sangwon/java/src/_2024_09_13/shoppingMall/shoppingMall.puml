@@ -1,0 +1,56 @@
+@startuml
+
+class Product {
+    name
+    price
+    stock
+
+    +reduceStock()
+    +increaseStock()
+}
+
+class Clothing extends Product {
+    size
+}
+
+class Electronics extends Product {
+    warrantyPeriod
+}
+
+class Customer {
+    name
+    id
+    orderHistory
+
+    +addOrder()
+}
+
+class Order extends Cart {
+    orderId
+    totalAmount
+
+    +calculateTotalAmount()
+    +processOrder()
+}
+
+class Cart {
+    customer
+    productList
+
+    +addProduct()
+    +removeProduct()
+    +calculateTotal()
+}
+
+interface Payment {
+    +pay()
+}
+
+class CardPayment implements Payment {
+    +pay()
+}
+
+class KakaoPayment implements Payment {
+    +pay()
+}
+@enduml
