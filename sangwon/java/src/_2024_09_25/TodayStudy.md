@@ -24,7 +24,7 @@ int x = number.stream() // 생성
     - boxing() 기본타입을 래퍼타입으로
 - 정렬
   - sorted() 오름차순으로 정렬
-  - sorted(Comparator.reverseOrder) 내림차순 정렬
+  - sorted(Comparator.reverseOrder()) 내림차순 정렬
 - 루핑 (요소 전체를 반복)
   - peek() 
     - 가공 중에 결과를 확인해볼 때 사용 / 특정 결과를 반환하지 않음.
