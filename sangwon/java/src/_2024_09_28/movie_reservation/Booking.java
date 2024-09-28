@@ -40,4 +40,11 @@ public class Booking {
     public void setSeats(int seats) {
         this.seats = seats;
     }
+
+    public void displayBookingInfo() {
+        System.out.println("예약 ID: " + getId());
+        System.out.println("고객이름: " + getCustomerName());
+        System.out.println("상영관 : " + getShowingId());
+        System.out.println("예약 좌석: " + getSeats());
+    }
 }
