@@ -23,29 +23,14 @@ public class Booking {
     public int getId() {
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getShowingId() {
         return showingId;
     }
-    public void setShowingId(int showingId) {
-        this.showingId = showingId;
-    }
-
     public String getCustomerName() {
         return customerName;
     }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public int getSeats() {
         return seats;
-    }
-    public void setSeats(int seats) {
-        this.seats = seats;
     }
 
     public void displayBookingInfo() {
