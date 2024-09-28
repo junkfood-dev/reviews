@@ -2,7 +2,10 @@ package _2024_09_28.movie_reservation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
     private int id;
@@ -69,5 +72,27 @@ public class Booking {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Booking> getBookingByCustomer(String name) {
+        List<Booking> bookings = new ArrayList<>();
+        try(
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM bookings WHERE customer_name = ?")) {
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int showingId = resultSet.getInt("showing_id");
+                String customerName = resultSet.getString("customer_name");
+                int seats = resultSet.getInt("seats");
+                bookings.add(new Booking(id, showingId, customerName, seats));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return bookings;
     }
 }
