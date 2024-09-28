@@ -36,7 +36,7 @@ public class Showing {
         List<Showing> showings = new ArrayList<>();
         try (Connection connection = Database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM showings AS s INNER JOIN movies AS m ON s.movie_id = m.id WHERE movies.title = ?"
+                     "SELECT * FROM showings AS s INNER JOIN movies AS m ON s.movie_id = m.id WHERE m.title = ?"
              )) {
             preparedStatement.setString(1, movieTitle);
             ResultSet resultSet = preparedStatement.executeQuery();
