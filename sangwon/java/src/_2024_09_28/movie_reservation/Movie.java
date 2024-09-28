@@ -48,7 +48,7 @@ public class Movie {
     public void displayMovieInfo() {
         System.out.println("영화 : " + getTitle());
         System.out.println("장르 : " + getGenre());
-        System.out.println("상영 시간 : " + duration + "분");
+        System.out.println("러닝타임 : " + duration + "분");
     }
 
     public static List<Movie> getAllMovies() {
