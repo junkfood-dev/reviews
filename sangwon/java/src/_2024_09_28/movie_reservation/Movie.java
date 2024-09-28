@@ -40,4 +40,10 @@ public class Movie {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    public void displayMovieInfo() {
+        System.out.println("영화 : " + getTitle());
+        System.out.println("장르 : " + getGenre());
+        System.out.println("상영 시간 : " + duration + "분");
+    }
 }
