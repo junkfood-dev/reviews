@@ -55,7 +55,7 @@ public class MembershipManagement {
             preparedStatement.setString(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                if (!resultSet.getString("password").equals(password)){
+                if (!resultSet.getString("password").equals(password)) {
                     System.out.println("비밀번호가 틀림");
                     return;
                 }
@@ -73,6 +73,44 @@ public class MembershipManagement {
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "회원조회 중 DB 오류 발생: " + e.getMessage(), e);
             System.out.println("회원조회 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.");
+        }
+    }
+
+    public void secessionToId(String id, String password) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM user WHERE id = ?"
+                )) {
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                if (!resultSet.getString("password").equals(password)) {
+                    System.out.println("비밀번호가 틀림");
+                    return;
+                }
+                if (resultSet.getBoolean("is_deleted")) {
+                    System.out.println("탈퇴한 회원");
+                    return;
+                }
+                try (
+                        PreparedStatement updateStatement = connection.prepareStatement(
+                                "UPDATE user SET is_deleted = true WHERE id = ?"
+                        )) {
+                    updateStatement.setString(1, id);
+                    int rows = updateStatement.executeUpdate();
+                    if (rows > 0) {
+                        System.out.println("회원탈퇴 성공");
+                    } else {
+                        System.out.println("탈퇴 실패");
+                    }
+                }
+            } else {
+                System.out.println("누구세요");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "회원탈퇴 중 DB 오류 발생: " + e.getMessage(), e);
+            System.out.println("회원탈퇴 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.");
         }
     }
 }
