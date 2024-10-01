@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class MembershipManagement {
     private static final Logger logger = Logger.getLogger(MembershipManagement.class.getName());
 
-    public void printMenu() {
+    public static void printMenu() {
         String menu = """
                 1. 회원가입
                 2. 가입조회
