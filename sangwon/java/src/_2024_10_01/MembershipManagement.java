@@ -113,4 +113,21 @@ public class MembershipManagement {
             System.out.println("회원탈퇴 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.");
         }
     }
+
+    public boolean isUserIdExists(String userId) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT COUNT(*) FROM user WHERE id = ?"
+                )) {
+            preparedStatement.setString(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "ID 중복 확인 중 DB 오류 발생: " + e.getMessage(), e);
+        }
+        return false;
+    }
 }
