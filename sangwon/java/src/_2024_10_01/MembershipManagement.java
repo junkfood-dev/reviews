@@ -2,6 +2,7 @@ package _2024_10_01;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +43,36 @@ public class MembershipManagement {
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "회원가입 중 DB 오류 발생: " + e.getMessage(), e);
             System.out.println("회원가입 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.");
+        }
+    }
+
+    public void displayMemberToId(String id, String password) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM user WHERE id = ?"
+                )) {
+            preparedStatement.setString(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                if (!resultSet.getString("password").equals(password)){
+                    System.out.println("비밀번호가 틀림");
+                    return;
+                }
+                if (resultSet.getBoolean("is_deleted")) {
+                    System.out.println("탈퇴한 회원");
+                    return;
+                }
+                System.out.println("유저 아이디: " + resultSet.getString("id"));
+                System.out.println("유저 성함: " + resultSet.getString("name"));
+                System.out.println("유저 email: " + resultSet.getString("email"));
+                System.out.println("가입 날짜: " + resultSet.getTimestamp("created_at"));
+            } else {
+                System.out.println("누구세요");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "회원조회 중 DB 오류 발생: " + e.getMessage(), e);
+            System.out.println("회원조회 중 문제가 발생했습니다. 나중에 다시 시도해 주세요.");
         }
     }
 }
