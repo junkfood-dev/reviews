@@ -1,0 +1,67 @@
+## DDL (data Definition Language)
+- 데이터베이스의 구조 정의 - 데이터를 어떻게 저장할 지 전체적인 골격을 결정하는 역할.
+- 테이블 생성하기, 테이블 구조 바꾸기
+- CREATE
+  - DATABASE 데이터베이스명 : 데이터베이스 생성
+  - TABLE 테이블명 (열, 데이터타입, 제약조건) : 테이블 생성
+    - 데이터타입
+      - CHAR(size) : 고정된 길이의 문자열로 저장
+      - VARCHAR(size) : 가변 길이의 문자열을 저장
+      - INT : 정수
+      - FLOAT : 실수
+      - DATE : 날짜
+      - TIME : 시간
+      - DATETIME : 날짜와 시간 저장 (2024-09-30 10:10:27) / timezone 보장안함 (국내)
+      - TIMESTAMP : 날짜와 시간 저장 (2024-09-30 10:10:27) / timezone 보장 (해외) 주로사용
+    - 제약조건
+      - NOT NULL : NULL값을 허용하지 않음
+      - DEFAULT : 데이터를 입력시 해당열에 아무런 값도 입력하지 않은 경우 기본으로 사용할 값
+      - UNIQUE : 해당 테이블 내에서 유일한 속성을 갖음, 중복값 저장 x
+      - AUTO_INCREMENT : 새로운 레코드 삽입 시 특정 열의 값을 자동으로 증가시키는 기능, 주로 기본 키로 사용되는 숫자 열에 적용
+      - PRIMARY KEY : 하나의 테이블에 있는 데이터를 식별하기 위한 기준(기본키)
+      - FOREIGN KEY : 테이블 간에 관계를 나타낼 때 사용하는 KEY, 다른 테이블의 기본키를 참조하는 외래키로 사용
+        - FOREIGN KEY (외래키) REFERENCES 참조할테이블(컬럼)
+        - FK 제약조건
+          1. 기본(RESTRICT) : 원천 데이터 삭제를 못하도록 제한
+            - 원천 데이터 삭제하려면 참조키부터 삭제해야함.
+          2. ON DELETE CASCADE : 참조하는 데이터까지 같이 자동 삭제
+          3. ON DELETE SET NULL : 참조하는 데이터의 key값을 null 처리
+        - 데이터의 무결성을 위해 사용
+        - 단점
+          - 테이블간 의존도가 높아져 추후 수작업으로 다룰 경우 변경에 불리함
+- ALTER
+  - 기존 테이블의 구조를 변경
+  - ALTER TABLE 테이블명
+    - ADD 열이름 타입 : 컬럼 추가
+    - RENAME COLUMN 컬럼명 TO 바꿀이름 : 컬럼명 변경
+    - MODIFY COLUMN 컬렴명 타입 : 컬럼 타입 변경
+      - 저장되어 있는 값과 타입이 다르면 변경 불가(문자열 -> 숫자)
+    - DROP COLUMN 컬럼명 : 컬럼 삭제
+- DROP
+  - 테이블을 삭제 
+  - DROP TABLE 테이블명
+- TRUNCATE
+  - 테이블을 초기 상태로 만듬
+  - TRUNCATE TABLE 테이블명
+
+### DB Index
+- 원하는 내용을 쉽게 찾을 수 있도록 표시
+- PRIMARY KEY 는 자동으로 인덱스 적용
+- 데이터 삽입,삭제,수정이 자주 일어나지 않고, SELECT(조회)가 많이 일어 나는 컬럼이 적절
+- 데이터 중복도가 낮을 수록 좋음
+- Cardinality가 높은 컬럼을 우선적으로 인덱싱
+  - Cardinality
+    - 특정 데이터 집합의 유니크한 값의 개수
+- 생성
+  - CREATE INDEX 인덱스명 ON 테이블명 (컬럼명, ...);
+- 삭제
+  - ALTER TABLE 테이블명 DROP INDEX 인덱스명
+- index 자료구조
+  - DBMS에서 index를 내부적으로 어떻게 저장하고 관리하는 지 (이진트리 검색)
+  - hash table
+    - key-value 형태로 이루어진 데이터를 저장하는데 특화
+    - WHERE 조건의 등호(=)연산에 효율이 좋지만, 부등호(<, >)연산은 부적합
+  - B-tree
+    - 자식 노드가 2개 이상인 트리
+    - key-value값들은 항상 key를 기준으로 오름차순 정렬
+    - WHERE 조건의 부등호(<, >)연산에 효율이 좋음, 등호(=)연산도 나름 괜찮
