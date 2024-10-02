@@ -1,4 +1,4 @@
-package join_the_membership;
+package _2024_10_02.join_the_membership;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
