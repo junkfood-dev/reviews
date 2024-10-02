@@ -129,4 +129,23 @@ public class MembershipManagement {
         }
         return false;
     }
+
+    public void editPassword(String password, String changePassword) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement changePassword2 = connection.prepareStatement(
+                        "UPDATE user SET password = ? WHERE password = ?"
+                )) {
+            changePassword2.setString(1, changePassword);
+            changePassword2.setString(2, password);
+            int row = changePassword2.executeUpdate();
+            if (row > 0) {
+                System.out.println("비밀번호 변경 완료");
+            } else {
+                System.out.println("변경 실패");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "비밀번호 변경 중 DB 오류 발생: " + e.getMessage(), e);
+        }
+    }
 }

@@ -87,7 +87,6 @@ public class JoinTheMembership {
                         }
                         break;
                     }
-
                     String inquiryPassword;
                     while (true) {
                         System.out.print("비밀번호 입력: ");
@@ -98,8 +97,43 @@ public class JoinTheMembership {
                         }
                         break;
                     }
-
                     membershipManagement.displayMemberToId(inquiryId, inquiryPassword);
+
+                    while (true) {
+                        System.out.println("1. 비밀번호 변경, 2. 메인메뉴로 돌아가기");
+                        String choice2;
+                        try{
+                            choice2 = sc.nextLine();
+                        } catch (InputMismatchException e) {
+                            System.out.println("올바른 번호를 입력해주세요.");
+                            continue;
+                        }
+                        switch (choice2) {
+                            case "1":
+                                System.out.println("비밀번호 (8자리이상, 영문, 숫자, 특수문자 포함)");
+                                String changePassword;
+                                while (true) {
+                                    System.out.print("바꾸실 비밀번호 입력: ");
+                                    changePassword = sc.nextLine();
+                                    if (passwordPattern.matcher(changePassword).matches()) {
+                                        if (!changePassword.equals(inquiryPassword)){
+                                            membershipManagement.editPassword(inquiryPassword, changePassword);
+                                            break;
+                                        } else {
+                                            System.out.println("현재 비밀번호와 같습니다.");
+                                            continue;
+                                        }
+                                    }
+                                    System.out.println("다시 입력 (8자리이상, 영문, 숫자, 특수문자 포함)");
+                                }
+                                break;
+                            case "2":
+                                break;
+                            default:
+                                System.out.println("잘못된 번호");
+                        }
+                        break;
+                    }
                     break;
 
                 case "3":
