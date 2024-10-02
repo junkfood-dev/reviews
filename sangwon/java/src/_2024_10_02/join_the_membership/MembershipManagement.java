@@ -137,10 +137,12 @@ public class MembershipManagement {
         try (
                 Connection connection = Database.getConnection();
                 PreparedStatement changePassword2 = connection.prepareStatement(
-                        "UPDATE user SET password = ? WHERE password = ?"
+                        "UPDATE user SET password = ?, updated_at = ? WHERE password = ?"
                 )) {
+            Timestamp changeTime = new Timestamp(System.currentTimeMillis());
             changePassword2.setString(1, changePassword);
-            changePassword2.setString(2, password);
+            changePassword2.setTimestamp(2, changeTime);
+            changePassword2.setString(3, password);
             int row = changePassword2.executeUpdate();
             if (row > 0) {
                 System.out.println("비밀번호 변경 완료");
