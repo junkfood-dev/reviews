@@ -120,4 +120,23 @@ public class BankApp {
             logger.log(Level.SEVERE, "회원탈퇴 중 오류 발생: " + e.getMessage(), e);
         }
     }
+
+    public void balanceInquiry(String name, String password) {
+        try(
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ? AND c.password = ?"
+                )){
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                System.out.println(name + "님의 잔액 : " + resultSet.getBigDecimal("balance"));
+            } else {
+                System.out.println("정보 없음");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "잔액 조회 중 오류 발생: " + e.getMessage(), e);
+        }
+    }
 }
