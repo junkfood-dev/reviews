@@ -17,4 +17,14 @@ public class Customer {
         this.address = address;
         this.password = password;
     }
+
+    public String getName() {
+        return name;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public String getPassword() {
+        return password;
+    }
 }
