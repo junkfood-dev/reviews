@@ -2,6 +2,7 @@ package _2024_10_03.bank;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,6 +48,34 @@ public class BankApp {
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "비밀번호 변경 중 오류 발생: " + e.getMessage(), e);
+        }
+    }
+
+    public void displayCustomer(String name, String password) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM customer WHERE name = ?"
+                )) {
+            preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                if (!resultSet.getString("password").equals(password)) {
+                    System.out.println("비밀번호가 틀림");
+                    return;
+                }
+                if (resultSet.getBoolean("is_deleted")) {
+                    System.out.println("탈퇴한 고객");
+                    return;
+                }
+                System.out.println("고객 성함: " + resultSet.getString("name"));
+                System.out.println("고객 주소: " + resultSet.getString("address"));
+                System.out.println("가입 날짜: " + resultSet.getTimestamp("created_at"));
+            } else {
+                System.out.println("정보 없음");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "회원조회 중 오류 발생: " + e.getMessage(), e);
         }
     }
 }
