@@ -1,5 +1,6 @@
 package _2024_10_03.bank;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +12,8 @@ public class BankApp {
         try(
                 Connection connection = Database.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO customer (name, address, password) VALUES (?, ? ,?)"
+                        "INSERT INTO customer (name, address, password) VALUES (?, ? ,?)",
+                        Statement.RETURN_GENERATED_KEYS
                 )){
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getAddress());
@@ -19,6 +21,20 @@ public class BankApp {
 
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected > 0) {
+                try(ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int customerId = generatedKeys.getInt(1);
+                        try(
+                                PreparedStatement accountStatement = connection.prepareStatement(
+                                        "INSERT INTO account (customer_id, balance) VALUES (?, ?)"
+                                )){
+                            accountStatement.setInt(1, customerId);
+                            accountStatement.setBigDecimal(2, BigDecimal.ZERO);
+                            accountStatement.executeUpdate();
+                        }
+                        System.out.println(customer.getName() + "님 계좌 생성");
+                    }
+                }
                 System.out.println("고객 등록 완료");
             } else {
                 System.out.println("고객 등록 실패");
