@@ -208,4 +208,71 @@ public class BankApp {
             logger.log(Level.SEVERE, "입금 중 오류 발생: " + e.getMessage(), e);
         }
     }
+
+    public void transfer(String name, String password, String toName, BigDecimal amount) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement accountStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ? AND c.password = ? ");
+                PreparedStatement toAccountStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ?");
+                PreparedStatement updateStatement = connection.prepareStatement(
+                        "UPDATE account SET balance = ? WHERE account_id = ?");
+                PreparedStatement toUpdateStatement = connection.prepareStatement(
+                        "UPDATE account SET balance = ? WHERE account_id = ?");
+                PreparedStatement transactionStatement = connection.prepareStatement(
+                        "INSERT INTO transaction (account_id, transaction_type, amount) VALUES (?, TRANSFER, ?)");
+                PreparedStatement toTransactionStatement = connection.prepareStatement(
+                        "INSERT INTO transaction (account_id, transaction_type, amount) VALUES (?, DEPOSIT, ?)")
+        ) {
+            connection.setAutoCommit(false);
+            accountStatement.setString(1, name);
+            accountStatement.setString(2, password);
+            ResultSet resultSet = accountStatement.executeQuery();
+            if (resultSet.next()) {
+                int accountId = resultSet.getInt("account_id");
+                BigDecimal currentBalance = resultSet.getBigDecimal("balance");
+                if (currentBalance.compareTo(amount) < 0) {
+                    System.out.println("이체 실패, 현재 잔액: " + currentBalance);
+                    connection.rollback();
+                    return;
+                }
+                toAccountStatement.setString(1, toName);
+                ResultSet toResultSet = toAccountStatement.executeQuery();
+                if (toResultSet.next()) {
+                    BigDecimal newBalance = currentBalance.subtract(amount);
+                    updateStatement.setBigDecimal(1, newBalance);
+                    updateStatement.setInt(2, accountId);
+                    updateStatement.executeUpdate();
+
+                    int toAccountId = toResultSet.getInt("account_id");
+                    BigDecimal toCurrentBalance = toResultSet.getBigDecimal("balance");
+                    BigDecimal toNewBalance = toCurrentBalance.add(amount);
+                    toUpdateStatement.setBigDecimal(1, toNewBalance);
+                    toUpdateStatement.setInt(2, toAccountId);
+                    toUpdateStatement.executeUpdate();
+
+                    transactionStatement.setInt(1, accountId);
+                    transactionStatement.setBigDecimal(2, amount);
+                    transactionStatement.executeUpdate();
+
+                    toTransactionStatement.setInt(1, toAccountId);
+                    toTransactionStatement.setBigDecimal(2, amount);
+                    toTransactionStatement.executeUpdate();
+
+                    connection.commit();
+                    System.out.println("이체 완료");
+                } else {
+                    System.out.println("받는사람 정보 없음");
+                    connection.rollback();
+                }
+            } else {
+                System.out.println("보낸사람 정보 없음");
+                connection.rollback();
+            }
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "이체 중 오류 발생: " + e.getMessage(), e);
+        }
+    }
 }
