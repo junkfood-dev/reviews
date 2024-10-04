@@ -12,7 +12,7 @@ public class Transaction {
 
     public enum TransactionType {
         DEPOSIT,
-        WITHDRAW,
+        WITHDRAWAL,
         TRANSFER
     }
 

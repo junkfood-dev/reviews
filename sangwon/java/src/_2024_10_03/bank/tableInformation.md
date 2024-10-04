@@ -20,7 +20,7 @@ CREATE TABLE account(
 CREATE TABLE transaction(
                             transaction_id   INT PRIMARY KEY AUTO_INCREMENT,
                             account_id       INT NOT NULL,
-                            transaction_type ENUM('DEPOSIT', 'WITHDRAW', 'TRANSFER'),
+                            transaction_type ENUM('DEPOSIT', 'WITHDRAWAL', 'TRANSFER'),
                             amount           DECIMAL(15, 2) DEFAULT 0 CHECK (amount > 0),
                             date             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                             FOREIGN KEY (account_id) REFERENCES account (account_id)
