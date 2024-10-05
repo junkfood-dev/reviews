@@ -9,25 +9,25 @@ public class BankApp {
     private static final Logger logger = Logger.getLogger(BankApp.class.getName());
 
     public void registerCustomer(Customer customer) {
-        try(
+        try (
                 Connection connection = Database.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "INSERT INTO customer (name, address, password) VALUES (?, ? ,?)",
                         Statement.RETURN_GENERATED_KEYS
-                )){
+                )) {
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getAddress());
             preparedStatement.setString(3, customer.getPassword());
 
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected > 0) {
-                try(ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         int customerId = generatedKeys.getInt(1);
-                        try(
+                        try (
                                 PreparedStatement accountStatement = connection.prepareStatement(
                                         "INSERT INTO account (customer_id, balance) VALUES (?, ?)"
-                                )){
+                                )) {
                             accountStatement.setInt(1, customerId);
                             accountStatement.setBigDecimal(2, BigDecimal.ZERO);
                             accountStatement.executeUpdate();
@@ -128,7 +128,7 @@ public class BankApp {
                 } else {
                     System.out.println("없는 정보");
                 }
-            }catch (SQLException e) {
+            } catch (SQLException e) {
                 connection.rollback();
                 logger.log(Level.SEVERE, "회원탈퇴 중 오류 발생: " + e.getMessage(), e);
             }
@@ -138,11 +138,11 @@ public class BankApp {
     }
 
     public void balanceInquiry(String name, String password) {
-        try(
+        try (
                 Connection connection = Database.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ? AND c.password = ?"
-                )){
+                )) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -153,6 +153,126 @@ public class BankApp {
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "잔액 조회 중 오류 발생: " + e.getMessage(), e);
+        }
+    }
+
+    public void depositWithdrawal(String name, String password, Transaction.TransactionType transactionType, BigDecimal amount) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement accountStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ? AND c.password = ?");
+                PreparedStatement updateStatement = connection.prepareStatement(
+                        "UPDATE account SET balance = ? WHERE account_id = ?");
+                PreparedStatement transactionStatement = connection.prepareStatement(
+                        "INSERT INTO transaction (account_id, transaction_type, amount) VALUES (?, ?, ?)")
+        ) {
+            connection.setAutoCommit(false);
+            accountStatement.setString(1, name);
+            accountStatement.setString(2, password);
+            ResultSet resultSet = accountStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int accountID = resultSet.getInt("account_id");
+                BigDecimal currentBalance = resultSet.getBigDecimal("balance");
+
+                BigDecimal newBalance = null;
+                if (transactionType == Transaction.TransactionType.DEPOSIT) {
+                    newBalance = currentBalance.add(amount);
+                } else if (transactionType == Transaction.TransactionType.WITHDRAWAL) {
+                    if (currentBalance.compareTo(amount) < 0) {
+                        System.out.println("출금 실패, 현재 잔액: " + currentBalance);
+                        connection.rollback();
+                        return;
+                    }
+                    newBalance = currentBalance.subtract(amount);
+                }
+
+                updateStatement.setBigDecimal(1, newBalance);
+                updateStatement.setInt(2, accountID);
+                updateStatement.executeUpdate();
+
+                transactionStatement.setInt(1, accountID);
+                transactionStatement.setString(2, String.valueOf(transactionType));
+                transactionStatement.setBigDecimal(3, amount);
+                transactionStatement.executeUpdate();
+
+                connection.commit();
+                String message = transactionType == Transaction.TransactionType.DEPOSIT ? "입금 후 잔액: " : "출금 후 잔액: ";
+                System.out.println(message + newBalance);
+            } else {
+                System.out.println("정보 없음");
+                connection.rollback();
+            }
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "입금 중 오류 발생: " + e.getMessage(), e);
+        }
+    }
+
+    public void transfer(String name, String password, String toName, BigDecimal amount) {
+        try (
+                Connection connection = Database.getConnection();
+                PreparedStatement accountStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ? AND c.password = ? ");
+                PreparedStatement toAccountStatement = connection.prepareStatement(
+                        "SELECT a.* FROM account AS a INNER JOIN customer AS c ON a.customer_id = c.customer_id WHERE c.name = ?");
+                PreparedStatement updateStatement = connection.prepareStatement(
+                        "UPDATE account SET balance = ? WHERE account_id = ?");
+                PreparedStatement toUpdateStatement = connection.prepareStatement(
+                        "UPDATE account SET balance = ? WHERE account_id = ?");
+                PreparedStatement transactionStatement = connection.prepareStatement(
+                        "INSERT INTO transaction (account_id, transaction_type, amount) VALUES (?, TRANSFER, ?)");
+                PreparedStatement toTransactionStatement = connection.prepareStatement(
+                        "INSERT INTO transaction (account_id, transaction_type, amount) VALUES (?, DEPOSIT, ?)")
+        ) {
+            connection.setAutoCommit(false);
+            accountStatement.setString(1, name);
+            accountStatement.setString(2, password);
+            ResultSet resultSet = accountStatement.executeQuery();
+            if (resultSet.next()) {
+                int accountId = resultSet.getInt("account_id");
+                BigDecimal currentBalance = resultSet.getBigDecimal("balance");
+                if (currentBalance.compareTo(amount) < 0) {
+                    System.out.println("이체 실패, 현재 잔액: " + currentBalance);
+                    connection.rollback();
+                    return;
+                }
+                toAccountStatement.setString(1, toName);
+                ResultSet toResultSet = toAccountStatement.executeQuery();
+                if (toResultSet.next()) {
+                    BigDecimal newBalance = currentBalance.subtract(amount);
+                    updateStatement.setBigDecimal(1, newBalance);
+                    updateStatement.setInt(2, accountId);
+                    updateStatement.executeUpdate();
+
+                    int toAccountId = toResultSet.getInt("account_id");
+                    BigDecimal toCurrentBalance = toResultSet.getBigDecimal("balance");
+                    BigDecimal toNewBalance = toCurrentBalance.add(amount);
+                    toUpdateStatement.setBigDecimal(1, toNewBalance);
+                    toUpdateStatement.setInt(2, toAccountId);
+                    toUpdateStatement.executeUpdate();
+
+                    transactionStatement.setInt(1, accountId);
+                    transactionStatement.setBigDecimal(2, amount);
+                    transactionStatement.executeUpdate();
+
+                    toTransactionStatement.setInt(1, toAccountId);
+                    toTransactionStatement.setBigDecimal(2, amount);
+                    toTransactionStatement.executeUpdate();
+
+                    connection.commit();
+                    System.out.println("이체 완료");
+                } else {
+                    System.out.println("받는사람 정보 없음");
+                    connection.rollback();
+                }
+            } else {
+                System.out.println("보낸사람 정보 없음");
+                connection.rollback();
+            }
+            connection.setAutoCommit(true);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "이체 중 오류 발생: " + e.getMessage(), e);
         }
     }
 }
