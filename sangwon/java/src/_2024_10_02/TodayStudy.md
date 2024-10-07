@@ -56,7 +56,7 @@ CREATE USER test_user IDENTIFIED BY '1234';
   - 히스토리 - 로그남기고, 출력하고 싶을 때
 
 ## ERD (Entity-Relationship-Diagram)
-- 개체(Entitiy)간의 관계(Relationship)를 시각적으로 표현할 때 사용
+- 개체(Entity)간의 관계(Relationship)를 시각적으로 표현할 때 사용
 - 구성요소
   - 개체(Entity)
     - 고유하게 식별할 수 있는 사물,개념,사건 등을 의미
